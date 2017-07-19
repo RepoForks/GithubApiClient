@@ -11,23 +11,17 @@ import android.widget.TextView;
 
 import com.example.vitali.githubapiclient.R;
 import com.example.vitali.githubapiclient.base.BaseFragment;
-import com.example.vitali.githubapiclient.data.model.User;
+import com.example.vitali.githubapiclient.data.model.Repos;
 import com.squareup.picasso.Picasso;
 
 
-public class ClientDetailFragment extends BaseFragment {
+public class ReposDetailFragment extends BaseFragment {
 
     private TextView tvName, tvFullName, tvUrl, tvDescription, tvPrivate;
     private ImageView ivAvatar;
-    private User user = new User();
+    private Repos repos;
 
-    public ClientDetailFragment() {
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public ReposDetailFragment() {
     }
 
     @Override
@@ -63,19 +57,44 @@ public class ClientDetailFragment extends BaseFragment {
     private void getData() {
         Bundle bundle = getArguments();
         if (bundle != null) {
-
+            repos = (Repos) bundle.getSerializable("ReposId");
         }
     }
 
     private void setDataInWidgets() {
-        tvName.setText(user.getName());
-        tvFullName.setText(user.getFullName());
-        tvUrl.setText(user.getUrl());
-        tvDescription.setText(user.getDescription());
-        tvPrivate.setText(user.getPrivate().toString());
-        if (user.getOwner().getAvatarUrl() != null) {
-            Picasso.with(getActivity()).
-                    load(user.getOwner().getAvatarUrl().replace("https", "http"))
+        if (repos.getName() != null) {
+            tvName.setText(repos.getName());
+        } else {
+            tvName.setText(getResources().getString(R.string.absence_name));
+        }
+
+        if (repos.getFullName() != null) {
+            tvFullName.setText(repos.getFullName());
+        } else {
+            tvFullName.setText(getResources().getString(R.string.absence_full_name));
+        }
+
+        if (repos.getUrl() != null) {
+            tvUrl.setText(repos.getUrl());
+        } else {
+            tvUrl.setText(getResources().getString(R.string.absence_url));
+        }
+
+        if (repos.getDescription() != null) {
+            tvDescription.setText(repos.getDescription());
+        } else {
+            tvDescription.setText(getResources().getString(R.string.absence_description));
+        }
+
+        if (repos.getPrivate()) {
+            tvPrivate.setText(getResources().getText(R.string.repos_private));
+        } else {
+            tvPrivate.setText(getResources().getText(R.string.repos_public));
+        }
+
+        if (repos.getOwner().getAvatarUrl() != null) {
+            Picasso.with(getActivity())
+                    .load(repos.getOwner().getAvatarUrl())
                     .into(ivAvatar);
         }
     }

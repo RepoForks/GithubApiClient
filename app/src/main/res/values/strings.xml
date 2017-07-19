@@ -3,4 +3,10 @@
 
     <string name="client_details_fragment">Details</string>
 
+    <string name="absence_name">Absence name</string>
+    <string name="absence_full_name">Absence full name</string>
+    <string name="absence_url">Absence url</string>
+    <string name="absence_description">Absence description</string>
+    <string name="repos_private">Private</string>
+    <string name="repos_public">Public</string>
 </resources>

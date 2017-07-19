@@ -1,41 +1,29 @@
 package com.example.vitali.githubapiclient.data.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class User {
 
-    @SerializedName("id")
-    @Expose
+public class Repos implements Serializable {
+
     private Integer id;
-    @SerializedName("name")
-    @Expose
     private String name;
     @SerializedName("full_name")
-    @Expose
     private String fullName;
     @SerializedName("owner")
-    @Expose
     private Owner owner;
     @SerializedName("private")
-    @Expose
-    private Boolean _private;
+    private Boolean isPrivate;
     @SerializedName("html_url")
-    @Expose
     private String htmlUrl;
-    @SerializedName("description")
-    @Expose
     private String description;
     @SerializedName("fork")
-    @Expose
-    private Boolean fork;
-    @SerializedName("url")
-    @Expose
+    private Boolean isFork;
     private String url;
     @SerializedName("permissions")
-    @Expose
     private Permissions permissions;
+
 
     public Integer getId() {
         return id;
@@ -70,11 +58,11 @@ public class User {
     }
 
     public Boolean getPrivate() {
-        return _private;
+        return isPrivate;
     }
 
-    public void setPrivate(Boolean _private) {
-        this._private = _private;
+    public void setPrivate(Boolean isPrivate) {
+        this.isPrivate = isPrivate;
     }
 
     public String getHtmlUrl() {
@@ -94,11 +82,11 @@ public class User {
     }
 
     public Boolean getFork() {
-        return fork;
+        return isFork;
     }
 
-    public void setFork(Boolean fork) {
-        this.fork = fork;
+    public void setFork(Boolean isFork) {
+        this.isFork = isFork;
     }
 
     public String getUrl() {

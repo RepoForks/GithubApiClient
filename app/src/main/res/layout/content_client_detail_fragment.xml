@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_account_circle_white_24dp" />
+                    android:src="@drawable/ic_account_circle_black_24dp" />
 
                 <TextView
                     android:id="@+id/tvUserDetailFullName"
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_computer_white_24dp" />
+                    android:src="@drawable/ic_computer_black_24dp" />
 
                 <TextView
                     android:id="@+id/tvUserDetailUrl"
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_description_white_24dp" />
+                    android:src="@drawable/ic_description_black_24dp" />
 
                 <TextView
                     android:id="@+id/tvUserDetailDescription"
@@ -119,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_visibility_white_24dp" />
+                    android:src="@drawable/ic_visibility_black_24dp" />
 
                 <TextView
                     android:id="@+id/tvUserDetailPrivate"

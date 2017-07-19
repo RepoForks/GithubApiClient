@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vitali.githubapiclient.R;
-import com.example.vitali.githubapiclient.data.model.User;
+import com.example.vitali.githubapiclient.data.model.Repos;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,10 +21,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private final Context context;
     private OnItemClickCallback callback;
-    List<User> users = new ArrayList<>();
+    private List<Repos> reposes = new ArrayList<>();
 
-    public UserAdapter(Context context) {
+    public UserAdapter(Context context, List<Repos> reposes) {
         this.context = context;
+        this.reposes = reposes;
     }
 
     @Override
@@ -35,21 +36,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-
-        final User user = users.get(position);
-        holder.tvName.setText(user.getName());
-        holder.tvUrl.setText(user.getUrl());
-        holder.tvDescription.setText(user.getDescription());
-        if (user.getOwner().getAvatarUrl() != null) {
-            Picasso.with(context).
-                    load(users.get(position).getOwner().getAvatarUrl().replace("https", "http"))
+        Repos repos = reposes.get(position);
+        holder.tvName.setText(repos.getName());
+        holder.tvUrl.setText(repos.getUrl());
+        holder.tvDescription.setText(repos.getDescription());
+        if (repos.getOwner().getAvatarUrl() != null) {
+            Picasso.with(context)
+                    .load(repos.getOwner().getAvatarUrl())
                     .into(holder.ivAvatar);
         }
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (callback != null) {
-                    callback.onClick(users.get(position));
+                    callback.onClick(reposes.get(position));
                 }
             }
         });
@@ -57,7 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return reposes.size();
     }
 
     public void setCallback(OnItemClickCallback callback) {
@@ -65,7 +65,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public interface OnItemClickCallback {
-        void onClick(User user);
+        void onClick(Repos user);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

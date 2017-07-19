@@ -1,42 +1,33 @@
 package com.example.vitali.githubapiclient.data.model;
 
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Permissions {
 
-    @SerializedName("admin")
-    @Expose
-    private Boolean admin;
-    @SerializedName("push")
-    @Expose
-    private Boolean push;
-    @SerializedName("pull")
-    @Expose
-    private Boolean pull;
+    private Boolean isAdmin;
+    private Boolean isPush;
+    private Boolean isPull;
 
     public Boolean getAdmin() {
-        return admin;
+        return isAdmin;
     }
 
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
+    public void setAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public Boolean getPush() {
-        return push;
+        return isPush;
     }
 
-    public void setPush(Boolean push) {
-        this.push = push;
+    public void setPush(Boolean isPush) {
+        this.isPush = isPush;
     }
 
     public Boolean getPull() {
-        return pull;
+        return isPull;
     }
 
-    public void setPull(Boolean pull) {
-        this.pull = pull;
+    public void setPull(Boolean isPull) {
+        this.isPull = isPull;
     }
 }

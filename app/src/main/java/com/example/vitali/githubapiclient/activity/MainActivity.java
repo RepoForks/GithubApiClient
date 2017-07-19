@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.vitali.githubapiclient.R;
-import com.example.vitali.githubapiclient.fragments.ClientsListFragment;
+import com.example.vitali.githubapiclient.fragments.ReposListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,9 +15,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            ClientsListFragment clientsListFragment = new ClientsListFragment();
+            ReposListFragment reposListFragment = new ReposListFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.container, clientsListFragment);
+            ft.add(R.id.container, reposListFragment);
             ft.commit();
         }
     }
