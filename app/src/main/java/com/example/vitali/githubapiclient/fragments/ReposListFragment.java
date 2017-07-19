@@ -55,10 +55,10 @@ public class ReposListFragment extends BaseFragment {
         setupRecycler();
         if (adapter == null) {
             initAdapter();
+            getData();
         } else {
             rwUser.setAdapter(adapter);
         }
-        getData();
     }
 
     private void setupRecycler() {
