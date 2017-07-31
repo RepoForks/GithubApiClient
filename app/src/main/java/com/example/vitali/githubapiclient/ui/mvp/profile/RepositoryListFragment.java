@@ -1,4 +1,4 @@
-package com.example.vitali.githubapiclient.ui.profile;
+package com.example.vitali.githubapiclient.ui.mvp.profile;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.example.vitali.githubapiclient.R;
 import com.example.vitali.githubapiclient.data.network.model.Repository;
-import com.example.vitali.githubapiclient.ui.details.RepositoryDetailFragment;
+import com.example.vitali.githubapiclient.ui.mvp.details.RepositoryDetailFragment;
 import com.example.vitali.githubapiclient.utils.NetworkUtils;
 import com.hannesdorfmann.mosby3.mvp.viewstate.MvpViewStateFragment;
 
@@ -40,7 +40,7 @@ public class RepositoryListFragment extends MvpViewStateFragment<RepositoryContr
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_clients_list, container, false);setRetainInstance(true);
+        View view = inflater.inflate(R.layout.fragment_clients_list, container, false);
         initToolbar(view);
         return view;
     }
@@ -121,8 +121,8 @@ public class RepositoryListFragment extends MvpViewStateFragment<RepositoryContr
     private void setupRecyclerView(View view) {
         rwUser = (RecyclerView) view.findViewById(R.id.rwList);
         rwUser.setHasFixedSize(true);
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
         rwUser.setLayoutManager(layoutManager);
     }
 

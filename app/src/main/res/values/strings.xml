@@ -9,6 +9,7 @@
     <string name="absence_description">Absence description</string>
     <string name="repos_private">Private</string>
     <string name="repos_public">Public</string>
+
     <string name="network_error">An error occurred during networking</string>
     <string name="loading_data">Loading Data...</string>
     <string name="data_download_error">Error. Please try again later...</string>

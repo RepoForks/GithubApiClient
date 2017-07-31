@@ -2,7 +2,6 @@ package com.example.vitali.githubapiclient.data.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 
@@ -106,26 +105,5 @@ public class Repository implements Serializable {
 
     public void setFromDatabase(boolean fromDatabase) {
         isFromDatabase = fromDatabase;
-    }
-
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
-        out.writeObject(id);
-        out.writeObject(name);
-        out.writeObject(fullName);
-        out.writeObject(url);
-        out.writeObject(description);
-        out.writeObject(isPrivate);
-        out.writeObject(owner.getAvatarUrl());
-    }
-
-    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-        id = (int) in.readObject();
-        name = (String) in.readObject();
-        fullName = (String) in.readObject();
-        url = (String) in.readObject();
-        description = (String) in.readObject();
-        isPrivate = (boolean) in.readObject();
-        String s = owner.getAvatarUrl();
-        s = (String) in.readObject();
     }
 }

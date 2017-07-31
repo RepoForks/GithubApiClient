@@ -1,4 +1,4 @@
-package com.example.vitali.githubapiclient.ui.profile;
+package com.example.vitali.githubapiclient.ui.mvp.profile;
 
 import android.content.Context;
 
@@ -12,11 +12,10 @@ import java.util.List;
 
 class RepositoryPresenter extends BasePresenter<RepositoryContract.View> implements RepositoryContract.Presenter {
 
-    private Context context;
     private LoadDataCallback loadDataCallback = new LoadDataCallback();
 
-    RepositoryPresenter(Context context) {
-        this.context = context;
+    RepositoryPresenter(Context c) {
+        Context context = c;
     }
 
     @Override
@@ -33,7 +32,9 @@ class RepositoryPresenter extends BasePresenter<RepositoryContract.View> impleme
                 case DataManager.TYPE_REPOSITORIES:
                     List<Repository> repositories = (List<Repository>) result;
                     if (isViewAttached()) {
+                   //     getView().showProgressDialog();
                         getView().setData(repositories);
+                   //     getView().hideProgressDialog();
                     }
                     break;
                 default:

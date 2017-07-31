@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.vitali.githubapiclient.R;
-import com.example.vitali.githubapiclient.ui.profile.RepositoryListFragment;
+import com.example.vitali.githubapiclient.ui.mvp.profile.RepositoryListFragment;
 
 public class MainActivity extends AppCompatActivity {
 

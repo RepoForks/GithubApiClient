@@ -1,4 +1,4 @@
-package com.example.vitali.githubapiclient.ui.profile;
+package com.example.vitali.githubapiclient.ui.mvp.profile;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +29,7 @@ class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolde
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, null, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user, parent, false);
         return new ViewHolder(view);
     }
 
@@ -73,7 +73,7 @@ class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolde
             tvUrl = (TextView) itemView.findViewById(R.id.tvUrl);
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
 
-            itemView.setOnClickListener(v -> listener.onClick(null));
+            itemView.setOnClickListener(v -> listener.onClick(repositories.get(getAdapterPosition())));
         }
     }
 

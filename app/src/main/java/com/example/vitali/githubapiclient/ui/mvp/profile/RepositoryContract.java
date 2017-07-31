@@ -1,4 +1,4 @@
-package com.example.vitali.githubapiclient.ui.profile;
+package com.example.vitali.githubapiclient.ui.mvp.profile;
 
 import android.content.Context;
 
@@ -17,6 +17,8 @@ interface RepositoryContract {
         void showRepositories();
 
         void showProgressDialog();
+
+        void hideProgressDialog();
 
         void showError();
     }

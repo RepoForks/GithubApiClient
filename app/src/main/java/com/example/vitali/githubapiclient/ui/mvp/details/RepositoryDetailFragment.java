@@ -1,10 +1,10 @@
-package com.example.vitali.githubapiclient.ui.details;
+package com.example.vitali.githubapiclient.ui.mvp.details;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +13,12 @@ import android.widget.TextView;
 
 import com.example.vitali.githubapiclient.R;
 import com.example.vitali.githubapiclient.data.network.model.Repository;
-import com.example.vitali.githubapiclient.ui.base.BaseFragment;
+import com.hannesdorfmann.mosby3.mvp.viewstate.MvpViewStateFragment;
 import com.squareup.picasso.Picasso;
 
 
-public class RepositoryDetailFragment extends BaseFragment implements RepositoryDetailContract.View {
+public class RepositoryDetailFragment extends MvpViewStateFragment<RepositoryDetailContract.View, RepositoryDetailPresenter, RepositoryDetailViewState>
+        implements RepositoryDetailContract.View {
 
     private TextView tvName, tvFullName, tvUrl, tvDescription, tvPrivate;
     private ImageView ivAvatar;
@@ -27,21 +28,43 @@ public class RepositoryDetailFragment extends BaseFragment implements Repository
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_client_detail, container, false);
-
         initToolbar(view);
-
-        ivAvatar = (ImageView) view.findViewById(R.id.ivUserDetailAvatar);
-        tvName = (TextView) view.findViewById(R.id.tvUserDetailName);
-        tvFullName = (TextView) view.findViewById(R.id.tvUserDetailFullName);
-        tvUrl = (TextView) view.findViewById(R.id.tvUserDetailUrl);
-        tvDescription = (TextView) view.findViewById(R.id.tvUserDetailDescription);
-        tvPrivate = (TextView) view.findViewById(R.id.tvUserDetailPrivate);
-
+        initView(view);
         getData();
         onBind();
         return view;
+    }
+
+    @NonNull
+    @Override
+    public RepositoryDetailPresenter createPresenter() {
+        return new RepositoryDetailPresenter(getContext());
+    }
+
+    @NonNull
+    @Override
+    public RepositoryDetailViewState createViewState() {
+        return new RepositoryDetailViewState();
+    }
+
+    @Override
+    public void onNewViewStateInstance() {
+    //    showRepository();
+    }
+
+    @Override
+    public void showRepository() {
+        RepositoryDetailViewState vs = viewState;
+        vs.setShowRepository();
+        presenter.getData();
     }
 
     public void onBind() {
@@ -80,14 +103,7 @@ public class RepositoryDetailFragment extends BaseFragment implements Repository
                     .load(repository.getOwner().getAvatarUrl())
                     .into(ivAvatar);
         } catch (NullPointerException e) {
-            Log.d("Log", "onBind: AvatarUrl is null");
-        }
-    }
-
-    private void getData() {
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            repository = (Repository) bundle.getSerializable("repos");
+            ivAvatar.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.identicon));
         }
     }
 
@@ -99,6 +115,22 @@ public class RepositoryDetailFragment extends BaseFragment implements Repository
             toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), R.color.white));
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
             toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
+        }
+    }
+
+    private void initView(View view) {
+        ivAvatar = (ImageView) view.findViewById(R.id.ivUserDetailAvatar);
+        tvName = (TextView) view.findViewById(R.id.tvUserDetailName);
+        tvFullName = (TextView) view.findViewById(R.id.tvUserDetailFullName);
+        tvUrl = (TextView) view.findViewById(R.id.tvUserDetailUrl);
+        tvDescription = (TextView) view.findViewById(R.id.tvUserDetailDescription);
+        tvPrivate = (TextView) view.findViewById(R.id.tvUserDetailPrivate);
+    }
+
+    private void getData() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            repository = (Repository) bundle.getSerializable("repos");
         }
     }
 }

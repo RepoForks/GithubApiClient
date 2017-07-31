@@ -1,4 +1,4 @@
-package com.example.vitali.githubapiclient.ui.profile;
+package com.example.vitali.githubapiclient.ui.mvp.profile;
 
 import com.hannesdorfmann.mosby3.mvp.viewstate.ViewState;
 

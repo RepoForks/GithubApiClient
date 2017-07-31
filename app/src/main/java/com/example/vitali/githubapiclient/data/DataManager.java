@@ -64,6 +64,7 @@ public class DataManager implements IDataManager {
                     Log.e("Error", "Error");
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<List<Repository>> call, @NonNull Throwable t) {
                 callback.onFailure(t);
