@@ -1,4 +1,4 @@
-package com.example.vitali.githubapiclient.data.model;
+package com.example.vitali.githubapiclient.data.network.model;
 
 import com.google.gson.annotations.SerializedName;
 

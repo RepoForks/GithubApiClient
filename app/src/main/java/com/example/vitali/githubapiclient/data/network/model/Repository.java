@@ -1,11 +1,12 @@
-package com.example.vitali.githubapiclient.data.model;
+package com.example.vitali.githubapiclient.data.network.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 
-public class Repos implements Serializable {
+public class Repository implements Serializable {
 
     private Integer id;
     private String name;
@@ -21,9 +22,11 @@ public class Repos implements Serializable {
     @SerializedName("fork")
     private Boolean isFork;
     private String url;
-    @SerializedName("permissions")
-    private Permissions permissions;
 
+    private boolean isFromDatabase;
+
+    public Repository() {
+    }
 
     public Integer getId() {
         return id;
@@ -97,11 +100,32 @@ public class Repos implements Serializable {
         this.url = url;
     }
 
-    public Permissions getPermissions() {
-        return permissions;
+    public boolean isFromDatabase() {
+        return isFromDatabase;
     }
 
-    public void setPermissions(Permissions permissions) {
-        this.permissions = permissions;
+    public void setFromDatabase(boolean fromDatabase) {
+        isFromDatabase = fromDatabase;
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        out.writeObject(id);
+        out.writeObject(name);
+        out.writeObject(fullName);
+        out.writeObject(url);
+        out.writeObject(description);
+        out.writeObject(isPrivate);
+        out.writeObject(owner.getAvatarUrl());
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        id = (int) in.readObject();
+        name = (String) in.readObject();
+        fullName = (String) in.readObject();
+        url = (String) in.readObject();
+        description = (String) in.readObject();
+        isPrivate = (boolean) in.readObject();
+        String s = owner.getAvatarUrl();
+        s = (String) in.readObject();
     }
 }

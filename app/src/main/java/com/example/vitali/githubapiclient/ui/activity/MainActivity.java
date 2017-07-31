@@ -1,11 +1,11 @@
-package com.example.vitali.githubapiclient.activity;
+package com.example.vitali.githubapiclient.ui.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.vitali.githubapiclient.R;
-import com.example.vitali.githubapiclient.fragments.ReposListFragment;
+import com.example.vitali.githubapiclient.ui.profile.RepositoryListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,9 +15,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            ReposListFragment reposListFragment = new ReposListFragment();
+            RepositoryListFragment repositoryListFragment = new RepositoryListFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.container, reposListFragment);
+            ft.add(R.id.container, repositoryListFragment);
             ft.commit();
         }
     }

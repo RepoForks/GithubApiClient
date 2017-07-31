@@ -1,4 +1,4 @@
-package com.example.vitali.githubapiclient.data.net;
+package com.example.vitali.githubapiclient.data.network;
 
 
 import com.google.gson.Gson;
@@ -15,7 +15,7 @@ public final class ServiceGenerator {
 
     private ServiceGenerator() {
         httpClient = new OkHttpClient.Builder();
-        githubService = createService(GithubApi.class, GithubApi.ROOT);
+        githubService = createService(GithubApi.class, GithubApi.BASE_URL);
     }
 
     public static ServiceGenerator getInstance() {

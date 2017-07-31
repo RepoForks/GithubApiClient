@@ -1,6 +1,5 @@
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -14,13 +13,19 @@
             android:id="@+id/toolbarDetailFragment"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:minHeight="?android:attr/actionBarSize"
-            android:elevation="4dp"
             android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:minHeight="?android:attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <include layout="@layout/content_client_detail_fragment" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/content_client_detail_fragment" />
+
+        </ScrollView>
 
     </LinearLayout>
 
