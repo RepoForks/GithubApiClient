@@ -13,4 +13,5 @@
     <string name="network_error">An error occurred during networking</string>
     <string name="loading_data">Loading Data...</string>
     <string name="data_download_error">Error. Please try again later...</string>
+    <string name="unknown_screen">Unknown screen key!</string>
 </resources>

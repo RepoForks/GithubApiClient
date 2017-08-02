@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 case Screens.REPOSITORY_DETAIL_FRAGMENT:
                     return RepositoryDetailFragment.newInstance(2, (Bundle) data);
                 default:
-                    throw new RuntimeException("Unknown screen key!");
+                    throw new RuntimeException(getString(R.string.unknown_screen));
             }
         }
 
