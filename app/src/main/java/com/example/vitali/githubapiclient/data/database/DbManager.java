@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.vitali.githubapiclient.data.database.table.RepositoriesTable;
 import com.example.vitali.githubapiclient.data.network.model.Owner;
@@ -91,7 +90,6 @@ public class DbManager implements IRepositoriesDbManager {
     }
 
     private ContentValues generateValuesFromWordModel(Repository repository) {
-        Log.d("MyTag", "Values Got: " + repository.getName());
         ContentValues values = new ContentValues();
         values.put(RepositoriesTable.ID, repository.getId());
         values.put(RepositoriesTable.NAME, repository.getName());

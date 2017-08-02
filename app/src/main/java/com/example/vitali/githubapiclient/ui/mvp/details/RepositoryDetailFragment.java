@@ -11,25 +11,36 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.vitali.githubapiclient.App;
 import com.example.vitali.githubapiclient.R;
 import com.example.vitali.githubapiclient.data.network.model.Repository;
+import com.example.vitali.githubapiclient.navigation.Screens;
 import com.hannesdorfmann.mosby3.mvp.viewstate.MvpViewStateFragment;
 import com.squareup.picasso.Picasso;
 
 
-public class RepositoryDetailFragment extends MvpViewStateFragment<RepositoryDetailContract.View, RepositoryDetailPresenter, RepositoryDetailViewState>
+public class RepositoryDetailFragment extends MvpViewStateFragment<RepositoryDetailContract.View,
+        RepositoryDetailPresenter, RepositoryDetailViewState>
         implements RepositoryDetailContract.View {
 
+    private static final String BUNDLE_KEY = "BundleKey";
     private TextView tvName, tvFullName, tvUrl, tvDescription, tvPrivate;
     private ImageView ivAvatar;
     private Repository repository;
 
-    public RepositoryDetailFragment() {
+    public static RepositoryDetailFragment newInstance(int position, Bundle bundle) {
+        RepositoryDetailFragment fragment = new RepositoryDetailFragment();
+        Bundle b = new Bundle();
+        b.putInt(Screens.KEY, position);
+        b.putSerializable(BUNDLE_KEY, bundle.getSerializable("repository"));
+        fragment.setArguments(b);
+        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getData();
         setRetainInstance(true);
     }
 
@@ -38,7 +49,6 @@ public class RepositoryDetailFragment extends MvpViewStateFragment<RepositoryDet
         View view = inflater.inflate(R.layout.fragment_client_detail, container, false);
         initToolbar(view);
         initView(view);
-        getData();
         onBind();
         return view;
     }
@@ -57,7 +67,7 @@ public class RepositoryDetailFragment extends MvpViewStateFragment<RepositoryDet
 
     @Override
     public void onNewViewStateInstance() {
-    //    showRepository();
+        //    showRepository();
     }
 
     @Override
@@ -110,11 +120,11 @@ public class RepositoryDetailFragment extends MvpViewStateFragment<RepositoryDet
     private void initToolbar(View view) {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbarDetailFragment);
         if (toolbar != null) {
-            ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
             toolbar.setTitle(R.string.client_details_fragment);
             toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), R.color.white));
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-            toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
+            toolbar.setNavigationOnClickListener(v -> App.INSTANCE.getRouter().backTo(Screens.REPOSITORY_LIST_FRAGMENT));
         }
     }
 
@@ -128,9 +138,6 @@ public class RepositoryDetailFragment extends MvpViewStateFragment<RepositoryDet
     }
 
     private void getData() {
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            repository = (Repository) bundle.getSerializable("repos");
-        }
+        repository = (Repository) getArguments().getSerializable(BUNDLE_KEY);
     }
 }

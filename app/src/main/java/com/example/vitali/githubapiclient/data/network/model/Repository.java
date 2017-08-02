@@ -25,6 +25,7 @@ public class Repository implements Serializable {
     private boolean isFromDatabase;
 
     public Repository() {
+
     }
 
     public Integer getId() {

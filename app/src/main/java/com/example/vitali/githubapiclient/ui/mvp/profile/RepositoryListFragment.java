@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,9 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.vitali.githubapiclient.App;
 import com.example.vitali.githubapiclient.R;
 import com.example.vitali.githubapiclient.data.network.model.Repository;
-import com.example.vitali.githubapiclient.ui.mvp.details.RepositoryDetailFragment;
+import com.example.vitali.githubapiclient.navigation.Screens;
 import com.example.vitali.githubapiclient.utils.NetworkUtils;
 import com.hannesdorfmann.mosby3.mvp.viewstate.MvpViewStateFragment;
 
@@ -31,6 +31,14 @@ public class RepositoryListFragment extends MvpViewStateFragment<RepositoryContr
     private RepositoryAdapter adapter;
     private RecyclerView rwUser;
     private ProgressDialog progressDialog;
+
+    public static RepositoryListFragment newInstance(int position){
+        RepositoryListFragment fragment = new RepositoryListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Screens.KEY, position);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -141,16 +149,9 @@ public class RepositoryListFragment extends MvpViewStateFragment<RepositoryContr
     }
 
     private void navigateToDetailFragment(Repository repository) {
-        RepositoryDetailFragment repositoryDetailFragment = new RepositoryDetailFragment();
-
         Bundle bundle = new Bundle();
-        bundle.putSerializable("repos", repository);
-        repositoryDetailFragment.setArguments(bundle);
-
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.container, repositoryDetailFragment);
-        ft.addToBackStack(null);
-        ft.commit();
+        bundle.putSerializable("repository", repository);
+        App.INSTANCE.getRouter().navigateTo(Screens.REPOSITORY_DETAIL_FRAGMENT, bundle);
     }
 
     private boolean getNetworkAvailability() {

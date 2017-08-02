@@ -52,4 +52,7 @@ dependencies {
 
     //MVP
     compile 'com.hannesdorfmann.mosby3:viewstate:3.0.4'
+
+    //Fragment navigation
+    compile 'ru.terrakok.cicerone:cicerone:2.0.0'
 }
